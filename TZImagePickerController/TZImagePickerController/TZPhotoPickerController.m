@@ -171,6 +171,7 @@ static CGSize AssetGridThumbnailSize;
     _previewButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _previewButton.frame = CGRectMake(10, 3, previewWidth + 2, 44);
     _previewButton.tz_width = tzImagePickerVc.maxImagesCount <= 1 ? 0 : previewWidth + 2;
+    _previewButton.hidden = tzImagePickerVc.maxImagesCount <= 1 ? YES : NO;
     [_previewButton addTarget:self action:@selector(previewButtonClick) forControlEvents:UIControlEventTouchUpInside];
     _previewButton.titleLabel.font = [UIFont systemFontOfSize:16];
     [_previewButton setTitle:previewText forState:UIControlStateNormal];
