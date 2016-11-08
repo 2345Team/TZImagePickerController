@@ -118,8 +118,12 @@
             _tipLable.numberOfLines = 0;
             _tipLable.font = [UIFont systemFontOfSize:16];
             _tipLable.textColor = [UIColor blackColor];
-            NSString *appName = [[NSBundle mainBundle].infoDictionary valueForKey:@"CFBundleDisplayName"];
+            
+            NSString *appName = [[NSBundle mainBundle].localizedInfoDictionary valueForKey:@"CFBundleDisplayName"];
+            if (!appName) appName = [[NSBundle mainBundle].infoDictionary valueForKey:@"CFBundleDisplayName"];
+            if (!appName) appName = [[NSBundle mainBundle].localizedInfoDictionary valueForKey:@"CFBundleName"];
             if (!appName) appName = [[NSBundle mainBundle].infoDictionary valueForKey:@"CFBundleName"];
+            
             NSString *tipText = [NSString stringWithFormat:[NSBundle tz_localizedStringForKey:@"Allow %@ to access your album in \"Settings -> Privacy -> Photos\""],appName];
             _tipLable.text = tipText;
             [self.view addSubview:_tipLable];

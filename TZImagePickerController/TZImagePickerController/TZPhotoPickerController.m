@@ -425,8 +425,11 @@ static CGSize AssetGridThumbnailSize;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         // 无权限 做一个友好的提示
-        NSString *appName = [[NSBundle mainBundle].infoDictionary valueForKey:@"CFBundleDisplayName"];
+        NSString *appName = [[NSBundle mainBundle].localizedInfoDictionary valueForKey:@"CFBundleDisplayName"];
+        if (!appName) appName = [[NSBundle mainBundle].infoDictionary valueForKey:@"CFBundleDisplayName"];
+        if (!appName) appName = [[NSBundle mainBundle].localizedInfoDictionary valueForKey:@"CFBundleName"];
         if (!appName) appName = [[NSBundle mainBundle].infoDictionary valueForKey:@"CFBundleName"];
+        
         NSString *message = [NSString stringWithFormat:[NSBundle tz_localizedStringForKey:@"Please allow %@ to access your camera in \"Settings -> Privacy -> Camera\""],appName];
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:[NSBundle tz_localizedStringForKey:@"Can not use camera"] message:message delegate:self cancelButtonTitle:[NSBundle tz_localizedStringForKey:@"Cancel"] otherButtonTitles:[NSBundle tz_localizedStringForKey:@"Setting"], nil];
         [alert show];
